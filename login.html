@@ -24,7 +24,7 @@
   <div class="w-full max-w-md px-4">
     <!-- Logo -->
     <div class="text-center mb-10">
-      <a href="/index.html" class="font-poppins font-bold text-3xl tracking-tight text-appleDark">Aura.</a>
+      <a href="./index.html" class="font-poppins font-bold text-3xl tracking-tight text-appleDark">Aura.</a>
       <p class="mt-2 text-gray-500 text-sm">Sign in to continue</p>
     </div>
 
@@ -124,10 +124,10 @@
       setTimeout(() => {
         if (username === 'admin' && password === 'admin123') {
           setUserRole('admin');
-          window.location.href = '/admin.html';
+          window.location.href = './admin.html';
         } else if (username.length > 0 && password.length > 0) {
           setUserRole('user');
-          window.location.href = '/index.html';
+          window.location.href = './index.html';
         } else {
           errorDiv.classList.remove('hidden');
           btn.textContent = 'Sign In';
