@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse Aura's full catalog of premium products. Filter by category, price, and rating.">
+  <title>All Products | Aura</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { poppins: ['Poppins','sans-serif'], inter: ['Inter','sans-serif'] },
+          colors: { appleGray: '#f5f5f7', appleDark: '#1d1d1f', appleBlue: '#2997ff', accent: '#2997ff' }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/E-commerce1/assets/products-B5gd3Qlw.js"></script>
+  <link rel="modulepreload" crossorigin href="/E-commerce1/assets/store-DejNxuCl.js">
+  <link rel="modulepreload" crossorigin href="/E-commerce1/assets/app-CyQ4-7Q0.js">
+  <link rel="stylesheet" crossorigin href="/E-commerce1/assets/store--MSCmV81.css">
+</head>
+<body class="font-inter text-appleDark bg-gray-50 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300 flex flex-col min-h-screen">
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    🎉 Free shipping on all orders over $99 — Limited time offer!
+  </div>
+
+  <!-- ─── Navbar ─────────────────────────────────────────────────────────── -->
+  <nav class="sticky top-0 z-40 bg-white/90 dark:bg-gray-950/90 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="./index.html" class="font-poppins font-bold text-2xl tracking-tight text-appleDark dark:text-white">
+          Aura<span class="text-accent">.</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="./index.html"    class="nav-link">Home</a>
+          <a href="./products.html" class="nav-link nav-link-active font-medium">Products</a>
+          <a href="./products.html?category=Electronics" class="nav-link">Electronics</a>
+          <a href="./products.html?category=Clothing"    class="nav-link">Clothing</a>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <div class="hidden md:flex items-center">
+            <input id="search-input" type="text" placeholder="Search products…"
+              class="w-0 opacity-0 h-9 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent dark:text-gray-100">
+            <button id="search-btn" class="btn-icon ml-1" aria-label="Search">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/>
+              </svg>
+            </button>
+          </div>
+          <button class="btn-icon" data-dm-toggle aria-label="Toggle dark mode">
+            <svg class="icon-sun w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"/></svg>
+            <svg class="icon-moon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+          <a href="./cart.html" class="btn-icon relative" aria-label="Cart">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span data-cart-count class="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1" style="display:none">0</span>
+          </a>
+          <button id="mobile-menu-btn" class="btn-icon md:hidden" aria-label="Open menu">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Drawer -->
+  <div id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <div class="flex items-center justify-between mb-8">
+      <span class="font-poppins font-bold text-2xl">Aura<span class="text-accent">.</span></span>
+      <button id="mobile-menu-close" class="btn-icon" aria-label="Close">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="flex flex-col gap-2">
+      <a href="./index.html"    class="text-xl font-semibold py-3 border-b border-gray-100 dark:border-gray-800">Home</a>
+      <a href="./products.html" class="text-xl font-semibold py-3 border-b border-gray-100 dark:border-gray-800 text-accent">All Products</a>
+      <a href="./products.html?category=Electronics" class="text-xl font-semibold py-3 border-b border-gray-100 dark:border-gray-800">Electronics</a>
+      <a href="./products.html?category=Clothing"    class="text-xl font-semibold py-3 border-b border-gray-100 dark:border-gray-800">Clothing</a>
+      <a href="./products.html?category=Furniture"   class="text-xl font-semibold py-3 border-b border-gray-100 dark:border-gray-800">Furniture</a>
+      <a href="./products.html?category=Accessories" class="text-xl font-semibold py-3 border-b border-gray-100 dark:border-gray-800">Accessories</a>
+      <a href="./products.html?category=Beauty"      class="text-xl font-semibold py-3">Beauty</a>
+    </nav>
+    <div class="mt-auto pt-8">
+      <a href="./cart.html" class="btn-primary w-full justify-center">View Cart</a>
+    </div>
+  </div>
+
+  <!-- ─── Page Header ────────────────────────────────────────────────────── -->
+  <div class="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-4">
+        <a href="./index.html" class="hover:text-accent transition-colors">Home</a>
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-gray-900 dark:text-gray-100" id="breadcrumb-current">All Products</span>
+      </nav>
+      <h1 class="font-poppins font-bold text-4xl text-gray-900 dark:text-gray-100" id="page-title">All Products</h1>
+    </div>
+  </div>
+
+  <!-- ─── Main Content ───────────────────────────────────────────────────── -->
+  <main class="flex-grow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      <!-- Mobile filter button -->
+      <div class="lg:hidden mb-6 flex items-center justify-between">
+        <button id="mobile-filter-btn"
+          class="flex items-center gap-2 btn-secondary text-sm py-2 px-4">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+          </svg>
+          Filters
+        </button>
+        <span id="results-count-mobile" class="text-sm text-gray-500 dark:text-gray-400"></span>
+      </div>
+
+      <div class="flex gap-8">
+        <!-- ─── Sidebar Filters ─────────────────────────────────────────── -->
+        <aside id="sidebar"
+          class="hidden lg:block w-64 flex-shrink-0 space-y-8 self-start sticky top-24">
+
+          <!-- Category Filter -->
+          <div>
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-4 text-sm uppercase tracking-widest">Category</h3>
+            <div class="space-y-2.5" id="category-filter-list">
+              <!-- Injected by JS -->
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Price Range -->
+          <div>
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-4 text-sm uppercase tracking-widest">Price Range</h3>
+            <div class="space-y-3">
+              <input type="range" id="price-max" min="0" max="600" value="600" step="10" class="w-full accent-accent">
+              <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
+                <span>$0</span>
+                <span class="font-semibold text-accent" id="price-label">Up to $600</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Rating Filter -->
+          <div>
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-4 text-sm uppercase tracking-widest">Min. Rating</h3>
+            <div class="space-y-2" id="rating-filter-list">
+              <!-- Injected by JS -->
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Clear -->
+          <button id="clear-filters-btn"
+            class="w-full text-sm font-medium text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 py-2 rounded-xl transition-colors">
+            Clear All Filters
+          </button>
+        </aside>
+
+        <!-- Mobile Filters Drawer Overlay -->
+        <div id="mobile-filter-overlay"
+          class="hidden fixed inset-0 bg-black/50 z-50 lg:hidden">
+          <div id="mobile-filter-panel"
+            class="absolute left-0 top-0 bottom-0 w-72 bg-white dark:bg-gray-900 p-6 overflow-y-auto shadow-2xl">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="font-poppins font-bold text-xl">Filters</h2>
+              <button id="mobile-filter-close" class="btn-icon">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+
+            <div class="space-y-6">
+              <!-- Category -->
+              <div>
+                <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-3 text-sm uppercase tracking-wide">Category</h3>
+                <div class="space-y-2" id="mobile-category-filter-list"></div>
+              </div>
+              <div class="divider"></div>
+
+              <!-- Price -->
+              <div>
+                <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-3 text-sm uppercase tracking-wide">Price Range</h3>
+                <input type="range" id="mobile-price-max" min="0" max="600" value="600" step="10" class="w-full">
+                <div class="flex justify-between text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  <span>$0</span>
+                  <span class="font-semibold text-accent" id="mobile-price-label">Up to $600</span>
+                </div>
+              </div>
+              <div class="divider"></div>
+
+              <!-- Rating -->
+              <div>
+                <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-3 text-sm uppercase tracking-wide">Min. Rating</h3>
+                <div class="space-y-2" id="mobile-rating-filter-list"></div>
+              </div>
+
+              <button id="mobile-apply-btn" class="btn-primary w-full justify-center mt-4">Apply Filters</button>
+              <button id="mobile-clear-btn" class="w-full text-sm font-medium text-red-500 hover:text-red-700 py-2 rounded-xl transition-colors mt-2">Clear Filters</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Right: Sort + Grid ──────────────────────────────────────── -->
+        <div class="flex-grow min-w-0">
+          <!-- Sort bar -->
+          <div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+            <span id="results-count" class="text-sm text-gray-500 dark:text-gray-400 font-medium"></span>
+            <div class="flex items-center gap-3">
+              <label class="text-sm text-gray-500 dark:text-gray-400">Sort by:</label>
+              <select id="sort-select"
+                class="text-sm border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent cursor-pointer">
+                <option value="default">Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="rating-desc">Top Rated</option>
+                <option value="newest">Newest</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Product Grid -->
+          <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ─── Footer (minimal) ────────────────────────────────────────────────── -->
+  <footer class="bg-appleDark dark:bg-black text-gray-400 py-8 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+      <span class="font-poppins font-bold text-white text-xl">Aura<span class="text-accent">.</span></span>
+      <p>&copy; 2026 Aura Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

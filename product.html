@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View product details, specifications, and reviews on Aura.">
+  <title>Product Details | Aura</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { poppins: ['Poppins','sans-serif'], inter: ['Inter','sans-serif'] },
+          colors: { appleGray: '#f5f5f7', appleDark: '#1d1d1f', appleBlue: '#2997ff', accent: '#2997ff' }
+        }
+      }
+    }
+  </script>
+  <script type="module" crossorigin src="/E-commerce1/assets/product-CU4qxD2r.js"></script>
+  <link rel="modulepreload" crossorigin href="/E-commerce1/assets/store-DejNxuCl.js">
+  <link rel="modulepreload" crossorigin href="/E-commerce1/assets/app-CyQ4-7Q0.js">
+  <link rel="stylesheet" crossorigin href="/E-commerce1/assets/store--MSCmV81.css">
+</head>
+<body class="font-inter text-appleDark bg-white dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300 flex flex-col min-h-screen">
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    🎉 Free shipping on all orders over $99!
+  </div>
+
+  <!-- ─── Navbar ─────────────────────────────────────────────────────────── -->
+  <nav class="sticky top-0 z-40 bg-white/90 dark:bg-gray-950/90 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="./index.html" class="font-poppins font-bold text-2xl tracking-tight text-appleDark dark:text-white">
+          Aura<span class="text-accent">.</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="./index.html"    class="nav-link">Home</a>
+          <a href="./products.html" class="nav-link">Products</a>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <button class="btn-icon" data-dm-toggle aria-label="Toggle dark mode">
+            <svg class="icon-sun w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 7a5 5 0 100 10A5 5 0 0012 7z"/></svg>
+            <svg class="icon-moon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+          <a href="./cart.html" class="btn-icon relative" aria-label="Cart">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span data-cart-count class="absolute -top-1 -right-1 min-w-[18px] h-[18px] bg-accent text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1" style="display:none">0</span>
+          </a>
+          <button id="mobile-menu-btn" class="btn-icon md:hidden" aria-label="Open menu">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Drawer -->
+  <div id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <div class="flex items-center justify-between mb-8">
+      <span class="font-poppins font-bold text-2xl">Aura<span class="text-accent">.</span></span>
+      <button id="mobile-menu-close" class="btn-icon" aria-label="Close">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="flex flex-col gap-2">
+      <a href="./index.html"    class="text-xl font-semibold py-3 border-b border-gray-100 dark:border-gray-800">Home</a>
+      <a href="./products.html" class="text-xl font-semibold py-3">All Products</a>
+    </nav>
+  </div>
+
+  <!-- ─── Main ───────────────────────────────────────────────────────────── -->
+  <main class="flex-grow" id="product-main">
+
+    <!-- Loading skeleton -->
+    <div id="loading-skeleton" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="animate-pulse flex flex-col md:flex-row gap-12">
+        <div class="w-full md:w-1/2 bg-gray-200 dark:bg-gray-800 aspect-square rounded-3xl"></div>
+        <div class="w-full md:w-1/2 pt-4 space-y-4">
+          <div class="h-3 bg-gray-200 dark:bg-gray-800 rounded w-1/4"></div>
+          <div class="h-10 bg-gray-200 dark:bg-gray-800 rounded w-3/4"></div>
+          <div class="h-6 bg-gray-200 dark:bg-gray-800 rounded w-1/3"></div>
+          <div class="h-12 bg-gray-200 dark:bg-gray-800 rounded-full w-56"></div>
+          <div class="space-y-2 pt-4">
+            <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-full"></div>
+            <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-5/6"></div>
+            <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-4/6"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product content injected here -->
+    <div id="product-container" class="hidden">
+
+      <!-- Breadcrumb + Detail -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-8">
+          <a href="./index.html"    class="hover:text-accent transition-colors">Home</a>
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <a href="./products.html" class="hover:text-accent transition-colors">Products</a>
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <span id="breadcrumb-title" class="text-gray-900 dark:text-gray-100 truncate max-w-xs"></span>
+        </nav>
+
+        <!-- Product Detail grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+
+          <!-- Left: Images -->
+          <div class="space-y-4">
+            <!-- Main image -->
+            <div class="zoom-container aspect-square rounded-3xl overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-lg">
+              <img id="main-image" src="" alt="" class="w-full h-full object-cover">
+            </div>
+            <!-- Thumbnails -->
+            <div id="thumbnails" class="flex gap-3 overflow-x-auto no-scrollbar pb-1"></div>
+          </div>
+
+          <!-- Right: Info -->
+          <div class="flex flex-col">
+            <!-- Category + badge -->
+            <div class="flex items-center gap-3 mb-3">
+              <span id="product-category" class="text-xs font-bold text-accent uppercase tracking-widest"></span>
+              <span id="product-badge"></span>
+            </div>
+
+            <!-- Title -->
+            <h1 id="product-title" class="font-poppins font-extrabold text-3xl md:text-4xl text-gray-900 dark:text-white leading-tight mb-4"></h1>
+
+            <!-- Rating row -->
+            <div class="flex items-center gap-3 mb-6">
+              <div id="product-stars"></div>
+              <span id="product-rating-text" class="text-sm text-gray-500 dark:text-gray-400"></span>
+            </div>
+
+            <!-- Price -->
+            <div id="product-price-row" class="flex items-baseline gap-3 mb-6"></div>
+
+            <!-- Description -->
+            <p id="product-description" class="text-gray-600 dark:text-gray-400 leading-relaxed mb-8 text-base"></p>
+
+            <!-- Quantity + Add to Cart -->
+            <div class="flex items-center gap-4 mb-6">
+              <!-- Qty stepper -->
+              <div class="qty-stepper">
+                <button id="qty-dec" class="qty-btn" aria-label="Decrease quantity">−</button>
+                <span id="qty-value" class="qty-value">1</span>
+                <button id="qty-inc" class="qty-btn" aria-label="Increase quantity">+</button>
+              </div>
+              <!-- Add to cart -->
+              <button id="add-to-cart-btn" class="btn-primary flex-1 py-4 text-base">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+
+            <!-- Wishlist -->
+            <button class="btn-secondary w-full mb-8 py-3 text-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+              Save to Wishlist
+            </button>
+
+            <!-- Feature badges -->
+            <div class="grid grid-cols-3 gap-3 text-center text-xs text-gray-500 dark:text-gray-400">
+              <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-2xl space-y-1">
+                <svg class="w-5 h-5 text-accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+                <span>Free Shipping</span>
+              </div>
+              <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-2xl space-y-1">
+                <svg class="w-5 h-5 text-accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                <span>30-Day Returns</span>
+              </div>
+              <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-2xl space-y-1">
+                <svg class="w-5 h-5 text-accent mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <span>2-Year Warranty</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── Reviews Section ────────────────────────────────────────────── -->
+      <section class="bg-gray-50 dark:bg-gray-900 py-16 mt-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="section-title mb-10">Customer Reviews</h2>
+          <div class="grid lg:grid-cols-3 gap-12">
+            <!-- Rating summary -->
+            <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 h-fit shadow-sm border border-gray-100 dark:border-gray-700">
+              <div class="text-center mb-6">
+                <p id="avg-rating-big" class="font-poppins font-extrabold text-6xl text-gray-900 dark:text-white"></p>
+                <div id="avg-stars" class="flex justify-center mt-2"></div>
+                <p id="review-count-label" class="text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
+              </div>
+              <div id="rating-bars" class="space-y-2"></div>
+            </div>
+            <!-- Individual reviews -->
+            <div class="lg:col-span-2 space-y-6" id="review-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── Related Products ───────────────────────────────────────────── -->
+      <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between mb-10">
+            <h2 class="section-title">You Might Also Like</h2>
+            <a href="./products.html" class="text-accent font-semibold text-sm hover:underline">View all</a>
+          </div>
+          <div id="related-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Not found state -->
+    <div id="not-found" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+      <div class="w-20 h-20 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">Product not found</h2>
+      <p class="text-gray-500 dark:text-gray-400 mb-8">The product you're looking for doesn't exist or has been removed.</p>
+      <a href="./products.html" class="btn-primary">Browse All Products</a>
+    </div>
+  </main>
+
+  <!-- ─── Footer ────────────────────────────────────────────────────────── -->
+  <footer class="bg-appleDark dark:bg-black text-gray-400 py-8 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+      <span class="font-poppins font-bold text-white text-xl">Aura<span class="text-accent">.</span></span>
+      <p>&copy; 2026 Aura Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

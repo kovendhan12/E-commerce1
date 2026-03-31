@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Aura</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { poppins: ['Poppins','sans-serif'], inter: ['Inter','sans-serif'] },
+          colors: { appleGray: '#f5f5f7', appleDark: '#1d1d1f', appleBlue: '#2997ff', accent: '#2997ff' }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/E-commerce1/assets/admin-jg8kxDf0.js"></script>
+  <link rel="modulepreload" crossorigin href="/E-commerce1/assets/store-DejNxuCl.js">
+  <link rel="modulepreload" crossorigin href="/E-commerce1/assets/app-CyQ4-7Q0.js">
+  <link rel="stylesheet" crossorigin href="/E-commerce1/assets/store--MSCmV81.css">
+</head>
+<body class="antialiased font-inter text-appleDark bg-appleGray min-h-screen">
+
+  <!-- Access Denied Overlay (shown if not admin) -->
+  <div id="access-denied" class="hidden fixed inset-0 bg-white z-50 flex items-center justify-center flex-col text-center p-4">
+    <div class="w-20 h-20 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-6">
+      <svg class="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+      </svg>
+    </div>
+    <h1 class="text-3xl font-poppins font-bold text-gray-900 mb-3">Access Restricted</h1>
+    <p class="text-gray-500 mb-8 max-w-sm">You need admin privileges to access this page. Please log in with your admin credentials.</p>
+    <a href="./login.html" class="btn-primary">Go to Login</a>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="edit-modal" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-xl w-full max-w-lg p-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-poppins font-bold">Edit Product</h2>
+        <button id="close-modal" class="text-gray-400 hover:text-gray-700 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      <form id="edit-form" class="space-y-4">
+        <input type="hidden" id="edit-id">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+          <input type="text" id="edit-title" class="input-field" placeholder="Product title" required>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Price ($)</label>
+            <input type="number" id="edit-price" class="input-field" step="0.01" min="0" placeholder="0.00" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Rating (0-5)</label>
+            <input type="number" id="edit-rating" class="input-field" step="0.1" min="0" max="5" placeholder="4.5" required>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+          <select id="edit-category" class="input-field">
+            <option value="Electronics">Electronics</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Accessories">Accessories</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
+          <input type="url" id="edit-image" class="input-field" placeholder="https://" required>
+        </div>
+        <div class="pt-4 flex gap-3">
+          <button type="button" id="cancel-modal" class="btn-secondary flex-1">Cancel</button>
+          <button type="submit" class="btn-primary flex-1">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main layout -->
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex flex-col w-64 bg-appleDark text-white fixed inset-y-0">
+      <div class="p-6 border-b border-white/10">
+        <a href="./index.html" class="font-poppins font-bold text-2xl tracking-tight">Aura.</a>
+        <p class="text-xs text-white/40 mt-1">Admin Dashboard</p>
+      </div>
+      <nav class="flex-1 p-4 space-y-1">
+        <a href="#overview" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-white bg-white/10 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+          Overview
+        </a>
+        <a href="#products" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-white/60 hover:text-white hover:bg-white/10 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+          Products
+        </a>
+        <a href="#add-product" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-white/60 hover:text-white hover:bg-white/10 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          Add Product
+        </a>
+      </nav>
+      <div class="p-4 border-t border-white/10">
+        <a href="./index.html" onclick="localStorage.setItem('userRole','user')" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-all text-sm font-medium">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 lg:ml-64 p-6 lg:p-10">
+      <!-- Overview Section -->
+      <section id="overview" class="mb-12">
+        <div class="mb-8">
+          <h1 class="text-3xl font-poppins font-bold text-gray-900">Dashboard</h1>
+          <p class="text-gray-500 mt-1">Welcome back, Admin!</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6" id="stats-cards"></div>
+      </section>
+
+      <!-- Products Table -->
+      <section id="products" class="mb-12">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="text-2xl font-poppins font-bold text-gray-900">Products</h2>
+            <p class="text-gray-500 text-sm mt-1">Manage your product catalog</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <table class="min-w-full">
+            <thead class="bg-gray-50 border-b border-gray-100">
+              <tr>
+                <th class="py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sm:pl-6">Product</th>
+                <th class="py-3.5 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Category</th>
+                <th class="py-3.5 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Price</th>
+                <th class="py-3.5 px-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Rating</th>
+                <th class="py-3.5 px-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-products-table" class="divide-y divide-gray-50"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Add Product Form -->
+      <section id="add-product">
+        <div class="mb-6">
+          <h2 class="text-2xl font-poppins font-bold text-gray-900">Add New Product</h2>
+          <p class="text-gray-500 text-sm mt-1">Fill in the details to add to your store</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+          <form id="add-product-form" class="grid grid-cols-1 sm:grid-cols-2 gap-6" novalidate>
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-medium text-gray-700 mb-1">Product Title</label>
+              <input type="text" id="new-title" class="input-field" placeholder="e.g. Premium Wireless Keyboard" required>
+              <p class="mt-1 text-xs text-red-500 hidden" id="err-title">Title is required</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Price ($)</label>
+              <input type="number" id="new-price" class="input-field" step="0.01" min="0" placeholder="0.00" required>
+              <p class="mt-1 text-xs text-red-500 hidden" id="err-price">Valid price required</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Rating (0–5)</label>
+              <input type="number" id="new-rating" class="input-field" step="0.1" min="0" max="5" placeholder="4.5" required>
+              <p class="mt-1 text-xs text-red-500 hidden" id="err-rating">Valid rating required</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+              <select id="new-category" class="input-field">
+                <option value="Electronics">Electronics</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
+              <input type="url" id="new-image" class="input-field" placeholder="https://images.unsplash.com/..." required>
+              <p class="mt-1 text-xs text-red-500 hidden" id="err-image">Valid image URL required</p>
+            </div>
+            <div class="sm:col-span-2">
+              <button type="submit" class="btn-primary w-full sm:w-auto px-12 py-4 text-base">Add Product</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+</body>
+</html>
